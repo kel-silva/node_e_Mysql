@@ -126,24 +126,33 @@ app.post('/cadastrar', function(req,res){
 });
   // rota de remover produtos
   app.get('/remover/:codigo&:imagem',function(req,res){
-  let sql = `DELETE FROM produtos  WHERE codigo = ${req.params.codigo}`;
+
+  //tratamento de execao
+   try {
+
+                  //SQL
+              let sql = `DELETE FROM produtos  WHERE codigo = ${req.params.codigo}`;
 
 
-  //executar comando sql
-  conexao.query(sql, function(erro, retorno){
-      // caso falhe o comando sql
-      if(erro) throw erro;
-      // caso o comando funcione faz a remocao do arquivo
-      fs.unlink(__dirname+'/imagens/'+ req.params.imagem, (erro_imagem)=>{
-        if (erro_imagem) {
-          console.log("Falha ao remover a imagem: " + erro_imagem.message);
-          return;
-        }
-        console.log("Imagem removida com sucesso.");
-      });
-    });
-  
-    res.redirect('/');
+              //executar comando sql
+              conexao.query(sql, function(erro, retorno){
+                  // caso falhe o comando sql
+                  if(erro) throw erro;
+                  // caso o comando funcione faz a remocao do arquivo
+                  fs.unlink(__dirname+'/imagens/'+ req.params.imagem, (erro_imagem)=>{
+                    if (erro_imagem) {
+                      console.log("Falha ao remover a imagem: " + erro_imagem.message);
+                      return;
+                    }
+                    console.log("Imagem removida com sucesso.");
+                  });
+                });
+              
+                res.redirect('/okRemover');
+    
+   } catch (error) {
+    res.redirect('/falhaREmover')
+   }
   });
 
   //rota para redirecionar para o formulario  de alteracao edicao
