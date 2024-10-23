@@ -171,46 +171,56 @@ app.post('/cadastrar', function(req,res){
       let valor = req.body.valor;
       let codigo = req.body.codigo;
       let nomeImagem = req.body.nomeImagem;
+
+      //validar nome do produto e valor 
+      if (nome =='' || valor == '' || isNaN(valor)) {
+        res.redirect('/falhaEdicao');
+        }else{
+
+
+        
       
-       //definir tipo d e edicao
-   try{
+                //definir tipo d e edicao
+            try{
 
-    //objeto da imagem
-    let  imagem = req.files.imagem.name;
- 
-   
-    //sql 
+              //objeto da imagem
+              let  imagem = req.files.imagem.name;
+          
+            
+              //sql 
 
-    let sql =`UPDATE produtos SET nome='${nome}',  valor=${valor}, imagem=  '${imagem.name}'  WHERE codigo=${codigo} `;
+              let sql =`UPDATE produtos SET nome='${nome}',  valor=${valor}, imagem=  '${imagem.name}'  WHERE codigo=${codigo} `;
 
-  // executar comando SQL
-   conexao.query(sql, function(erro, retorno){
+            // executar comando SQL
+            conexao.query(sql, function(erro, retorno){
 
-    // caso falhe o comando SQl
-    if(erro) throw erro;
+              // caso falhe o comando SQl
+              if(erro) throw erro;
 
-    //remover imagem antiga
-    fs.unlink(__dirname+'/imagens/'+ nome.imagem,(erro_imagem)=>{
-      console.log('falha ao remover a imagem');
-    });
+              //remover imagem antiga
+              fs.unlink(__dirname+'/imagens/'+ nome.imagem,(erro_imagem)=>{
+                console.log('falha ao remover a imagem');
+              });
 
-    //cadastrar nova imagem
-    imagem.mv(__dirname+'imagens'+ imagem.name);
+              //cadastrar nova imagem
+              imagem.mv(__dirname+'imagens'+ imagem.name);
 
 
-     
-   }); 
-  }catch(erro){
-    let sql =`UPDATE produtos SET nome='${nome}',  valor=${valor} WHERE codigo=${codigo} `;
+              
+            }); 
+            }catch(erro){
+              let sql =`UPDATE produtos SET nome='${nome}',  valor=${valor} WHERE codigo=${codigo} `;
 
-    //executar comando SQl
-    conexao.query (sql, function(erro, retorno){
-        //caso falhe o comando Sql
-        if(erro) throw erro;
-    });
-  }
-    //redirecionamento
-    res.redirect('/');
+              //executar comando SQl
+              conexao.query (sql, function(erro, retorno){
+                  //caso falhe o comando Sql
+                  if(erro) throw erro;
+              });
+            }
+              //redirecionamento
+              res.redirect('/okEdicao');
+          }
+        
   })
   // Iniciar o servidor
   app.listen(8080);
