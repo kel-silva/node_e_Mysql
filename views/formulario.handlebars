@@ -20,6 +20,15 @@
                 <input type="hidden" name="nomeImagem" value = "{{produto.imagem}}">;
                 <input type="text" name="nome" class="form-control" placeholder="nome do produto">
                 <input type="number" name="valor" class="form-control" placeholder="valor do produto">
+
+                <select name="categoria" class="form-control">
+                    <option value="">Categoria do produto</option>
+                    <option value="alimenticio">Alimenticio</option>
+                    <option value="eletronico">Eletronico</option>
+                    <option value="vestuario">Vestuario</option>
+                </select>
+
+
                 <input type="file" name="imagem" class="form-control" >
                   <input type="submit" class="btn btn-primary"value="Cadastrar"  >
             {{!-- formujlario para cadastro de produtos e listagem do nosso produtos  --}}   
@@ -28,23 +37,5 @@
         
         </div>
     </div>
-    {{!-- listamgemd de produtos  --}}
-    <div class="container">
-        <div class="row">
-           {{#each produtos}}
-                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card">
-                    <img src="../imagens/{{imagem}}" >
-                   <div class="textos">
-                            <p>{{nome}}</p>
-                            <p>{{valor}}</p>
-
-                   </div>
-                    <a href="/formularioEditar/{{codigo}}" class="btn btn-warning">Alterar</a>
-                    <a href="/remover/{{codigo}}&{{imagem}}" class="btn btn-danger ">Remover</a>
-                </div>
-            </div>
-           {{/each}}
-        </div>
-    </div>
+  
 </main>
