@@ -104,6 +104,25 @@ app.get('/:situacao', function(req, res) {
     });
 
     })
+
+    //rota de pesquisa
+
+    app.post('/pesquisa', function(req,res){
+
+      //obter o termo pesquisar
+
+      let termo = req.body.termo;
+
+      //SQl
+        let sql = `SELECT * FROM produtos WHERE nome LIKE '%${termo}%'`;
+
+        //executar comando sql
+        conexao.query(sql,function(erro, retorno){
+          res.render('lista',{produtos:retorno});
+    
+        });
+
+    });
 //
 
 //rota cadastro
