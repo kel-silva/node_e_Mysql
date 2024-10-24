@@ -65,30 +65,48 @@ conexao.connect(function(erro) {
 // Rota principal
 app.get('/', function(req, res) {
 
-  //SQL
-    let  sql = "SELECT * FROM produtos";
-    //executando comando
-    conexao.query(sql,function(erro,retorno){
-      res.render('formulario',{produtos:retorno});
+  
+   
+      res.render('formulario');
 
-    });
+    
 });
 
 //rota principal contendo a situacao
 app.get('/:situacao', function(req, res) {
 
-  //SQL
-    let  sql = "SELECT * FROM produtos";
-    //executando comando
-    conexao.query(sql,function(erro,retorno){
-      res.render('formulario',{produtos:retorno, situacao:req.params.situacao});
+ 
+      res.render('formulario',{ situacao:req.params.situacao});
 
-    });
+   
 });
 
 //fim da tora principal contendo situacao
 
-//rota cadastrar
+//rota de listamgem
+    app.get('/listar/:categoria',function(req, res){
+
+      let categoria = req.params.categoria;
+
+
+      //SQL
+        let sql = '';
+      if (categoria == 'todos'){
+        sql  = "SELECT * FROM produtos";
+    }else{
+          sql = `SELECT * FROM produtos WHERE categoria = '${categoria}'`
+    }
+
+    //executar comando sql
+    conexao.query(sql,function(erro,retorno){
+      res.render('lista',{produtos:retorno});
+
+    });
+
+    })
+//
+
+//rota cadastro
 app.post('/cadastrar', function(req,res){
    try {
     //obter os dados que sao utilizado para o cadastro
