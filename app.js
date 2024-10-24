@@ -118,7 +118,9 @@ app.get('/:situacao', function(req, res) {
 
         //executar comando sql
         conexao.query(sql,function(erro, retorno){
-          res.render('lista',{produtos:retorno});
+
+          let semRegistros = retorno.length == 0 ? true : false;
+          res.render('lista',{produtos:retorno, semRegistros:semRegistros});
     
         });
 

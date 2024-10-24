@@ -1,6 +1,12 @@
 
 
 <main>
+{{!-- Exibir  mesagem  se nescessario --}}
+
+   {{#if semRegistros}}
+    <h1 class="produtoNaoEncontrado">Nenhum Produto Encontrado :(</h1>
+    <img class="imagemNaoEncontrada" src="../imagens/naoEncontrado.jpg" alt="Produto não encontrado">
+{{/if}}
 
 
    

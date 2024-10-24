@@ -28,6 +28,7 @@ form img{
     justify-content: space-around;
     margin-top: 30px;
     font-weight: bold;
+    
 }
 .card a{
     margin-top: 5px;
@@ -51,4 +52,19 @@ form img{
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
+}
+.produtoNaoEncontrado{
+    text-align: center;
+    margin-top: 50px;
+    color: red;
+}
+.produtoNaoEncontrado img{
+    width: 10%; /* Ajuste o tamanho conforme necessário */
+    display: block;
+    margin: 20px auto; /* Centraliza a imagem */
+}
+.imagemNaoEncontrada {
+    width: 20%; /* Ajuste o tamanho conforme necessário */
+    display: block;
+    margin: 20px auto; /* Centraliza a imagem */
 }
