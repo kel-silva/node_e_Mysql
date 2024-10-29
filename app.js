@@ -1,13 +1,16 @@
-// 1. Importar express-handlebars e extrair a função engine()
+// 1. Importar express
 const express = require('express');
+
+//importar modulo de conexao com banco Mysqlsql
+
+const conexao= require('./bd/conexao_mysql')
 
 //importar modo upload
 const fileupload = require ('express-fileupload');
 //
 const { engine } = require('express-handlebars');
 
-//importar modulo sql2
-const mysql = require('mysql2');
+
 //File system
 const fs =require ('fs');
 
@@ -48,19 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 //
 
-// 3. Estabelecer a conexão com o banco de dados MySQL
-const conexao = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'projeto'
-});
 
-// Testar a conexão
-conexao.connect(function(erro) {
-  if (erro) throw erro;
-  console.log("Conexao Efetuada com Sucesso");
-});
 
 // Rota principal
 app.get('/', function(req, res) {
